@@ -1,0 +1,8 @@
+compile_flags.txt
+compile_commands.json
+/build
+/.direnv
+/.cache
+run.sh
+hyprlandd.conf
+.envrc
