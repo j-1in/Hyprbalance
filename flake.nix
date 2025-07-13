@@ -16,7 +16,7 @@
 
     devShells = genPerSystem (system: pkgs: {
       # default = pkgs.mkShell {
-      default = pkgs.mkShell.override {inherit (hyprland.packages.${system}.hyprland-debug) stdenv;} {
+      default = pkgs.mkShell.override {inherit (hyprland.packages.${system}.hyprland) stdenv;} {
         name = "hyprland-plugin-shell";
         shellHook = ''
           meson setup build --reconfigure

@@ -1,4 +1,4 @@
-shared_module('example',
+shared_module('hyprbalance',
   'main.cpp',
   cpp_args: ['-DWLR_USE_UNSTABLE'],
   include_directories: incdir,
