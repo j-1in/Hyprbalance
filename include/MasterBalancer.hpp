@@ -8,14 +8,15 @@
 #include <hyprland/src/managers/LayoutManager.hpp>
 #undef private
 
-class CDwindleBalancer: public IBalancer {
+class CMasterBalancer: public IBalancer {
   public:
-    CDwindleBalancer() = default;
-    ~CDwindleBalancer() override = default;
+    CMasterBalancer() = default;
+    ~CMasterBalancer() override = default;
 
     void balanceColOfWindows() override;
     void balanceRowOfWindows() override;
     void balanceAllWindows() override;
+
 };
 
-static auto* dLayout = reinterpret_cast<CHyprDwindleLayout*>(g_pLayoutManager->getCurrentLayout());
+static auto* mLayout = reinterpret_cast<CHyprMasterLayout*>(g_pLayoutManager->getCurrentLayout());

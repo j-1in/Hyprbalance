@@ -1,5 +1,6 @@
 #include "include/globals.hpp"
 #include "include/DwindleBalancer.hpp"
+#include "include/MasterBalancer.hpp"
 
 #include <unistd.h>
 
@@ -28,15 +29,12 @@ APICALL EXPORT std::string PLUGIN_API_VERSION() {
 SDispatchResult onBalanceDispatcher(std::string arg) {
     if (arg == "vertical")
         g_balancer->balanceColOfWindows();
-        // balanceColOfWindows();
     if (arg == "horizontal")
         g_balancer->balanceRowOfWindows();
     if (arg == "all")
         g_balancer->balanceAllWindows();
-        // g_BalanceDwindleLayout->balanceAllWindows();
     else
         return SDispatchResult {.success = false, .error = "Unknown balance type" + arg};
-        // throw std::invalid_argument("Invalid balance type: " + arg);
     return SDispatchResult {.success = true};
 }
 
@@ -59,7 +57,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
     if (g_pLayoutManager->m_currentLayoutID == CLayoutManager::LAYOUT_DWINDLE) {
         g_balancer = std::make_unique<CDwindleBalancer>();
     } else if (g_pLayoutManager->m_currentLayoutID == CLayoutManager::LAYOUT_MASTER) {
-        // TODO
+        g_balancer = std::make_unique<CMasterBalancer>();
     } else {
         // invalid layout or incompatible with Hyprbalance
         HyprlandAPI::addNotification(
@@ -70,9 +68,6 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
             5000
         );
     }
-
-    // g_BalanceDwindleLayout = std::make_unique<CBalanceDwindleLayout>();
-    // HyprlandAPI::addLayout(PHANDLE, "bd", g_BalanceDwindleLayout.get());
 
     return {"hyprbalance", "Balance window sizes", "J-L1N", "1.0"};
 }
