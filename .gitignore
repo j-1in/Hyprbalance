@@ -6,3 +6,4 @@ compile_commands.json
 run.sh
 hyprlandd.conf
 .envrc
+AGENTS.md
